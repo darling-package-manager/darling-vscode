@@ -1,6 +1,6 @@
 [package]
 name = "darling-vscode"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Darling implementation for VSCode (and Codium) extensions."
 license = "MIT"
@@ -8,6 +8,6 @@ authors = ["Violet Iapalucci"]
 
 [dependencies]
 anyhow = "1.0.81"
-darling-api = "0.1.1"
+darling-api = "0.1.2"
 regex = "1.10.4"
 which = "6.0.1"

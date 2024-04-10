@@ -25,16 +25,16 @@ checksum = "cf4b9d6a944f767f8e5e0db018570623c85f3d925ac718db4e06d0187adb21c1"
 
 [[package]]
 name = "darling-api"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d538b887416cd92a4d7477e19d6fd82a8f88f43d9e3546571af16520bb08b806"
+checksum = "80301c8102818ee043aad3209c57a82ed3af0511283f9ba50d7e614d0e3c823b"
 dependencies = [
  "anyhow",
 ]
 
 [[package]]
 name = "darling-vscode"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "darling-api",

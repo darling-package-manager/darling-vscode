@@ -9,28 +9,14 @@ impl darling::PackageManager for VSCode {
         "vscode".to_owned()
     }
 
-    fn install(&self, _context: &darling::Context, package: &darling::InstallationEntry) -> anyhow::Result<Option<String>> {
+    fn install(&self, _context: &darling::Context, package: &darling::InstallationEntry) -> anyhow::Result<()> {
         std::process::Command::new(code_or_codium()?)
             .arg("--install-extension")
             .arg(&package.name)
             .spawn()?
             .wait()?;
 
-        let version_pattern = regex::Regex::new(&format!("{}@(.+)", package.name))?;
-        let extension_info = String::from_utf8(
-            std::process::Command::new(code_or_codium()?)
-                .arg("--show-versions")
-                .arg("--list-extensions")
-                .output()?
-                .stdout,
-        )?;
-
-        Ok(Some(
-            version_pattern
-                .captures(&extension_info)
-                .ok_or_else(|| anyhow::anyhow!("Erorr parsing VSCode extension data"))?[1]
-                .to_owned(),
-        ))
+        Ok(())
     }
 
     fn uninstall(&self, _context: &darling::Context, package: &darling::InstallationEntry) -> anyhow::Result<()> {

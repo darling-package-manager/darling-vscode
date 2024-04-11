@@ -29,19 +29,20 @@ impl darling::PackageManager for VSCode {
     }
 
     fn get_all_explicit(&self, _context: &darling::Context) -> anyhow::Result<Vec<(String, String)>> {
-        Ok(String::from_utf8(
+        let extensions = String::from_utf8(
             std::process::Command::new(code_or_codium()?)
                 .arg("--show-versions")
                 .arg("--list-extensions")
                 .output()?
                 .stdout,
-        )?
-        .split('\n')
-        .map(|line| {
-            let parts = line.split('@').collect::<Vec<_>>();
-            (parts[0].to_owned(), parts[1].to_owned())
-        })
-        .collect::<Vec<_>>())
+        )?;
+        let list = extensions.lines().filter(|line| !line.chars().all(|char| char.is_whitespace()));
+        Ok(list
+            .map(|line| {
+                let parts = line.split('@').collect::<Vec<_>>();
+                (parts[0].to_owned(), parts[1].to_owned())
+            })
+            .collect::<Vec<_>>())
     }
 }
 
